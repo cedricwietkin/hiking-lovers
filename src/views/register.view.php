@@ -1,6 +1,5 @@
-<form action="#" method="post">
+<form action="/updateprofile" method="post" enctype="multipart/form-data">
     <div>
-
         <label for="firstname">First name</label>
         <input type="text" id="firstname" name="firstname"/>
     </div>
@@ -20,6 +19,12 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password"/>
     </div>
+    div>
+    <label for="photo">Profile Photo:</label>
+    <input type="file" id="photo" name="photo" accept="image/*">
+    </div>
+
+    <button type="submit">Update Profile</button>
 
     <button type="submit">Register</button>
 

@@ -6,8 +6,6 @@ include_once "inc/default.inc.php";
 
 use core\Router;
 
-
-
 $router = new Router();
 
 $url_path = trim(
@@ -16,7 +14,6 @@ $url_path = trim(
         PHP_URL_PATH));
 
 $method = $_SERVER['REQUEST_METHOD']; // GET -- POST
-
 $router->route($url_path, $method);
 
 

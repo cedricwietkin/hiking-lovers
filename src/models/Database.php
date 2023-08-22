@@ -3,13 +3,10 @@ declare(strict_types=1);
 
 namespace Models;
 
-
 use PDO;
 use PDOStatement;
 
-
 class Database
-
 {
     private PDO $pdo;
 

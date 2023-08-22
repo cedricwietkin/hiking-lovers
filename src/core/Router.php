@@ -15,8 +15,6 @@ class Router
         $authController = new AuthController();
         $isLoggedIn = $authController->isLoggedIn();
 
-
-
         if (isset($_GET['profile_updated']) && $_GET['profile_updated'] === 'true') {
             echo '<script>alert("Your profile is updated!");</script>';
         }
@@ -29,7 +27,6 @@ class Router
         try {
             $url_path = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), "/");
             $method = $_SERVER['REQUEST_METHOD']; // GET -- POST
-
             switch ($url_path) {
             case "":
             case "/":
@@ -67,7 +64,7 @@ class Router
                         $userController->searchUserAndRedirect($searchTerm);
                     }
                     break;
-                case "user":
+            case "user":
                     $userController = new UserController();
                     if ($method === "GET") {
                         $userId = $_GET['id'] ?? null;
@@ -82,6 +79,10 @@ class Router
                             // You might want to display an error or redirect to a default page
                         }
                     }
+                    break;
+            case "user_list":
+                    $userController = new UserController();
+                    $userController->showAllUsersAdmin();
                     break;
             case "profil":
                 $userController = new UserController();
@@ -99,18 +100,24 @@ class Router
                 $hikeController = new HikeController();
                 if ($method === "GET") $hikeController->showAll();
                 break;
+            case "hike-list":
+                    $hikeController = new HikeController();
+                    $hikeController->showAllHikeAdmin();
+                    break;
             case "hike":
                 $hikeController = new HikeController();
-                $hikeController->show($_GET['id']);
+                $hikeController->showOneHike($_GET['id']);
                 break;
-
+            case "myhikes":
+                    $hikeController = new HikeController();
+                    if ($method === "GET") $hikeController->allHikeofUser();
+                    break;
             case "addhike":
                 $hikeController = new HikeController();
                 if ($method === "GET") $hikeController->showAddHikeForm();
 
                 if ($method === "POST") $hikeController->addHike($_SESSION['user']['id'], $_POST['hikename'], $_POST['distance'], $_POST['duration'], $_POST['elevation_gain'], $_POST['description'], $_POST['tags']);
                 break;
-
             case "editHike":
                 $hikeController = new HikeController();
                 if ($method === "GET") {
@@ -118,10 +125,22 @@ class Router
                 $hikeController->editHike($hikeId);
                     }
                 break;
-
+            case "deletehike":
+                    $hikeController = new HikeController();
+                    if ($method === "GET" && isset($_GET['id'])) {
+                        $hikeController->deleteHike($_GET['id']);
+                    }
+                    break;
             case "updatehike":
                     $hikeController = new HikeController();
-                    if ($method === "POST") $hikeController->updatehike($_POST['name'], $_POST['distance'], $_POST['duration'], $_POST['elevation_gain'], $_POST['description'], $_POST['tags']);
+                    if ($method === "POST") {
+                        $hikeId = $_POST['hike_id'] ?? null; // Fetch hike_id from the POST data
+                        $hikeController->updateHike($hikeId,$_POST['name'], $_POST['distance'], $_POST['duration'], $_POST['elevation_gain'], $_POST['description'], $_POST['tags']);
+                    }
+                    break;
+            case "admin":
+                    $userController = new UserController();
+                    $userController->adminProfile();
                     break;
             case "tags":
                     $tagsController = new TagsController();
@@ -139,3 +158,20 @@ class Router
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

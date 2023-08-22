@@ -25,6 +25,19 @@
         <label for="id"></label>
         <input type="hidden" id="hike_id" name="hike_id" value="<?= htmlspecialchars($hike['id']) ?>" />
     </div>
+
+    <div>
+
+    <label for="tags">Select a tag</label>
+
+        <select name="tags" id="tags">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+             <option value="hard">Hard</option>
+  
+        </select>
+
+    </div>
     
 
     <button type="submit">Update Hike</button>

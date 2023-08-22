@@ -18,8 +18,8 @@
         <nav>
             <a href="/"><strong>Hiking Lovers</strong></a>
                 <?php if (!empty($_SESSION['user'])): ?>
-                    Bonjour <?= $_SESSION['user']['nickname'] ?>
-
+                    <a href="/profil">Bonjour <?= $_SESSION['user']['nickname'] ?></a>
+                    <a href="/addhike">Add a hike</a>
                     <a href="/logout">Logout</a>
                 <?php else: ?>
                 <div class="buttons">

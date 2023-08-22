@@ -21,6 +21,19 @@
         <input type="text" id="description" name="description"/>
     </div>
 
+    <div>
+
+    <label for="tags">Select a tag</label>
+
+        <select name="tags" id="tags">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+             <option value="hard">Hard</option>
+  
+        </select>
+
+    </div>
+
     <button type="submit">Add Hike</button>
 
 </form>

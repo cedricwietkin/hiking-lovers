@@ -32,8 +32,6 @@ class User extends Database
 
         return $searchedUsers;
     }
-
-
 }
 
 
